@@ -1,0 +1,173 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity router_to_arbiter is
+	port(
+	clk, reset: in std_logic;
+	current : in INTEGER; 
+	fifo_in_local, fifo_in_west, fifo_in_east, fifo_in_north, fifo_in_south : in std_logic_vector(11 downto 0); 
+	w_en_north, w_en_south, w_en_east, w_en_west, w_en_local: out std_logic;
+	credit_out_north, credit_out_south, credit_out_east, credit_out_west, credit_out_local: in std_logic; 
+	empty_in_north, empty_in_south, empty_in_east, empty_in_west, empty_in_local: in std_logic; 
+	fifo_out_north, fifo_out_south, fifo_out_east, fifo_out_west, fifo_out_local: out std_logic_vector(11 downto 0);	
+	r_en_north_in, r_en_south_in, r_en_east_in, r_en_west_in, r_en_local_in: out std_logic
+	);
+end router_to_arbiter;
+
+architecture behavioral of router_to_arbiter is
+	
+	component routing port(
+		flit : in std_logic_vector(11 downto 0); --it comes from arbiter
+		current : in integer;
+		local_direction, north_direction, south_direction, east_direction, west_direction : out std_logic);
+	end component;
+	
+	component arbiter port(
+		clk: in std_logic; reset: in std_logic; 
+		r: in std_logic_vector(3 downto 0);
+		g: out std_logic_vector(3 downto 0));
+	end component;
+	
+	signal local_dir_north, local_dir_south, local_dir_east, local_dir_west: std_logic;
+	signal north_dir_local, north_dir_south, north_dir_east, north_dir_west: std_logic;
+	signal south_dir_local, south_dir_north, south_dir_east, south_dir_west: std_logic;
+	signal east_dir_local, east_dir_north, east_dir_south, east_dir_west: std_logic;
+	signal west_dir_local, west_dir_north, west_dir_south, west_dir_east: std_logic;	
+	signal req_out_north, req_out_south, req_out_east, req_out_west, req_out_local: std_logic_vector(3 downto 0);	
+	signal grant_north, grant_south, grant_east, grant_west, grant_local: std_logic_vector(3 downto 0);	
+	signal wr_en_north, wr_en_south, wr_en_east, wr_en_west, wr_en_local: std_logic;
+	signal wr_data_north, wr_data_south, wr_data_east, wr_data_west, wr_data_local: std_logic_vector(11 downto 0);
+	
+begin
+
+	
+--------------------------------- south-----------------------------------------
+
+	routing_south: routing port map(
+	current => current,flit => fifo_in_south,
+	local_direction => south_dir_local, north_direction => south_dir_north, south_direction => open, 
+	east_direction => south_dir_east, west_direction => south_dir_west);
+	
+	req_out_south(0) <= north_dir_south when (fifo_in_north(11 downto 10)="00") and (empty_in_north = '0')else '0';
+	req_out_south(1) <= east_dir_south when (fifo_in_east(11 downto 10)="00") and (empty_in_east = '0') else '0';
+	req_out_south(2) <= west_dir_south when (fifo_in_west(11 downto 10)="00") and (empty_in_west = '0') else '0';
+	req_out_south(3) <= local_dir_south when (fifo_in_local(11 downto 10)="00") and (empty_in_local = '0') else '0';
+	------------------------------- west-------------------------------------------
+	routing_west: routing port map(
+	current => current , flit => fifo_in_west,
+	local_direction => west_dir_local, north_direction => west_dir_north, south_direction => west_dir_south, 
+	east_direction => west_dir_east, west_direction => open);
+
+	req_out_west(0) <= north_dir_west when (fifo_in_north(11 downto 10)="00") and (empty_in_north = '0') else '0';
+	req_out_west(1) <= south_dir_west when (fifo_in_south(11 downto 10)="00") and (empty_in_south = '0') else '0';
+	req_out_west(2) <= east_dir_west when (fifo_in_east(11 downto 10)="00") and (empty_in_east = '0') else '0';
+	req_out_west(3) <= local_dir_west when (fifo_in_local(11 downto 10)="00") and (empty_in_local = '0') else '0';
+	------------------------------- east-------------------------------------------
+	routing_east: routing port map(
+	current => current, flit => fifo_in_east,
+	local_direction => east_dir_local, north_direction => east_dir_north, south_direction => east_dir_south, 
+	east_direction => open, west_direction => east_dir_west);
+		
+	req_out_east(0) <= north_dir_east when (fifo_in_north(11 downto 10)="00") and (empty_in_north = '0') else '0';
+	req_out_east(1) <= south_dir_east when (fifo_in_south(11 downto 10)="00") and (empty_in_south = '0') else '0';
+	req_out_east(2) <= west_dir_east when (fifo_in_west(11 downto 10)="00") and (empty_in_west = '0') else '0';
+	req_out_east(3) <= local_dir_east when (fifo_in_local(11 downto 10)="00") and (empty_in_local = '0') else '0';
+	--------------------------------north---------------------------------------
+	routing_north: routing port map(
+	current => current, flit => fifo_in_north,
+	local_direction => north_dir_local, north_direction => open, south_direction => north_dir_south, 
+	east_direction => north_dir_east, west_direction => north_dir_west);
+		
+	req_out_north(0) <= south_dir_north when (fifo_in_south(11 downto 10)="00") and (empty_in_south = '0') else '0';
+	req_out_north(1) <= east_dir_north when (fifo_in_east(11 downto 10)="00") and (empty_in_east = '0') else '0';
+	req_out_north(2) <= west_dir_north when (fifo_in_west(11 downto 10)="00") and (empty_in_west = '0') else '0';
+	req_out_north(3) <= local_dir_north when (fifo_in_local(11 downto 10)="00") and (empty_in_local = '0') else '0';
+	----------------------------------local-------------------------------------------	
+	routing_local: routing port map(
+	current => current, flit => fifo_in_local,
+	local_direction => open, north_direction => local_dir_north, south_direction => local_dir_south, 
+	east_direction => local_dir_east, west_direction => local_dir_west);
+			
+	req_out_local(0) <= north_dir_local when (fifo_in_north(11 downto 10)="00") and (empty_in_north = '0') else '0';
+	req_out_local(1) <= south_dir_local when (fifo_in_south(11 downto 10)="00") and (empty_in_south = '0') else '0';
+	req_out_local(2) <= east_dir_local when (fifo_in_east(11 downto 10)="00") and (empty_in_east = '0') else '0';
+	req_out_local(3) <= west_dir_local when (fifo_in_west(11 downto 10)="00") and (empty_in_west = '0') else '0';
+	
+	arbiter_north: arbiter port map(
+	clk => clk, reset => reset,
+	r => req_out_north, g => grant_north
+	);
+	
+	arbiter_south: arbiter port map(
+	clk => clk, reset => reset,
+	r => req_out_south, g => grant_south
+	);
+	
+	arbiter_east: arbiter port map(
+	clk => clk, reset => reset,
+	r => req_out_east, g => grant_east
+	);
+	
+	arbiter_west: arbiter port map(
+	clk => clk, reset => reset,
+	r => req_out_west, g => grant_west
+	);
+	
+	arbiter_local: arbiter port map(
+	clk => clk, reset => reset,
+	r => req_out_local, g => grant_local
+	);
+-----------------------------------------Crossbar Switch---------------------------------------------
+	wr_en_north <= '1' when (grant_north(0)='1' or grant_north(1)='1' or grant_north(2)='1' or grant_north(3)='1') and (credit_out_north = '0') else '0';
+	wr_data_north<=fifo_in_south when (grant_north(0)='1') else
+						fifo_in_east when (grant_north(1)='1') else
+						fifo_in_west when (grant_north(2)='1') else
+						fifo_in_local when (grant_north(3)='1') else
+						(others=>'0');			
+	w_en_north <= wr_en_north;
+	fifo_out_north <= wr_data_north;
+-----						
+	wr_en_south <= '1' when (grant_south(0)='1' or grant_south(1)='1' or grant_south(2)='1' or grant_south(3)='1') and (credit_out_south = '0') else '0';
+	wr_data_south<=fifo_in_north when (grant_south(0)='1') else
+						fifo_in_east when (grant_south(1)='1') else
+						fifo_in_west when (grant_south(2)='1') else
+						fifo_in_local when (grant_south(3)='1') else
+						(others=>'0');				
+	w_en_south <= wr_en_south;
+	fifo_out_south <= wr_data_south;
+-----				
+	wr_en_east <= '1' when (grant_east(0)='1' or grant_east(1)='1' or grant_east(2)='1' or grant_east(3)='1') and (credit_out_east = '0') else '0';
+	wr_data_east<=fifo_in_north when (grant_east(0)='1') else
+						fifo_in_south when (grant_east(1)='1') else
+						fifo_in_west when (grant_east(2)='1') else
+						fifo_in_local when (grant_east(3)='1') else
+						(others=>'0');						
+	w_en_east <= wr_en_east;
+	fifo_out_east <= wr_data_east;	
+-----	
+	wr_en_west <= '1' when (grant_west(0)='1' or grant_west(1)='1' or grant_west(2)='1' or grant_west(3)='1') and (credit_out_west = '0') else '0';
+	wr_data_west<=fifo_in_north when (grant_west(0)='1') else
+						fifo_in_south when (grant_west(1)='1') else
+						fifo_in_east when (grant_west(2)='1') else
+						fifo_in_local when (grant_west(3)='1') else
+						(others=>'0');					
+	w_en_west <= wr_en_west;
+	fifo_out_west <= wr_data_west;
+-----	
+	wr_en_local <= '1' when (grant_local(0)='1' or grant_local(1)='1' or grant_local(2)='1' or grant_local(3)='1') and (credit_out_local = '0') else '0';
+	wr_data_local<=fifo_in_north when (grant_local(0)='1') else
+						fifo_in_south when (grant_local(1)='1') else
+						fifo_in_east when (grant_local(2)='1') else
+						fifo_in_west when (grant_local(3)='1') else
+						(others=>'0');					
+	w_en_local <= wr_en_local;
+	fifo_out_local <= wr_data_local;
+	
+	r_en_north_in <= '1' when (grant_south(0)='1' or grant_east(0)='1' or grant_west(0)='1' or grant_local(0)='1') else '0'; 																																									
+	r_en_south_in <= '1' when (grant_north(0)='1' or grant_east(1)='1' or grant_west(1)='1' or grant_local(1)='1') else '0';
+	r_en_east_in <= '1' when (grant_north(1)='1' or grant_south(1)='1' or grant_west(2)='1' or grant_local(2)='1') else '0';
+	r_en_west_in <= '1' when (grant_north(2)='1' or grant_south(2)='1' or grant_east(2)='1' or grant_local(3)='1') else '0';
+	r_en_local_in <= '1' when (grant_north(3)='1' or grant_south(3)='1' or grant_east(3)='1' or grant_west(3)='1') else '0';
+	
+end behavioral;

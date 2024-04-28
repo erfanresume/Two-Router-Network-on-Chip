@@ -1,0 +1,26 @@
+
+State Machine - |NoC|router:router_6|arbiter:arbiter_unit|state_reg
+Name state_reg.grante state_reg.grantw state_reg.grants state_reg.grantn state_reg.grantl state_reg.waitre state_reg.waitrw state_reg.waitrs state_reg.waitrn state_reg.waitrl 
+state_reg.waitrl 0 0 0 0 0 0 0 0 0 0 
+state_reg.waitrn 0 0 0 0 0 0 0 0 1 1 
+state_reg.waitrs 0 0 0 0 0 0 0 1 0 1 
+state_reg.waitrw 0 0 0 0 0 0 1 0 0 1 
+state_reg.waitre 0 0 0 0 0 1 0 0 0 1 
+state_reg.grantl 0 0 0 0 1 0 0 0 0 1 
+state_reg.grantn 0 0 0 1 0 0 0 0 0 1 
+state_reg.grants 0 0 1 0 0 0 0 0 0 1 
+state_reg.grantw 0 1 0 0 0 0 0 0 0 1 
+state_reg.grante 1 0 0 0 0 0 0 0 0 1 
+
+State Machine - |NoC|router:router_5|arbiter:arbiter_unit|state_reg
+Name state_reg.grante state_reg.grantw state_reg.grants state_reg.grantn state_reg.grantl state_reg.waitre state_reg.waitrw state_reg.waitrs state_reg.waitrn state_reg.waitrl 
+state_reg.waitrl 0 0 0 0 0 0 0 0 0 0 
+state_reg.waitrn 0 0 0 0 0 0 0 0 1 1 
+state_reg.waitrs 0 0 0 0 0 0 0 1 0 1 
+state_reg.waitrw 0 0 0 0 0 0 1 0 0 1 
+state_reg.waitre 0 0 0 0 0 1 0 0 0 1 
+state_reg.grantl 0 0 0 0 1 0 0 0 0 1 
+state_reg.grantn 0 0 0 1 0 0 0 0 0 1 
+state_reg.grants 0 0 1 0 0 0 0 0 0 1 
+state_reg.grantw 0 1 0 0 0 0 0 0 0 1 
+state_reg.grante 1 0 0 0 0 0 0 0 0 1 

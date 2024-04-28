@@ -1,0 +1,338 @@
+m255
+K3
+13
+cModel Technology
+Z0 dF:\installed program\Quartus II\quartus\bin\Altera_SRC\2Router_NoC_version4\simulation\modelsim
+Earbiter
+Z1 w1688813443
+Z2 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+Z3 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z4 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z5 dF:\installed program\Quartus II\quartus\bin\Altera_SRC\2Router_NoC_version4\simulation\modelsim
+Z6 8F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/arbiter.vhd
+Z7 FF:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/arbiter.vhd
+l0
+L5
+V4`B9244aWdIMKOJ]Yjg?h0
+Z8 OV;C;10.1d;51
+31
+Z9 !s108 1691142525.854000
+Z10 !s90 -reportprogress|300|-93|-work|work|F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/arbiter.vhd|
+Z11 !s107 F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/arbiter.vhd|
+Z12 o-93 -work work -O0
+Z13 tExplicit 1
+!s100 =VRR`RXnKmQo4hZIFDR212
+!i10b 1
+Abehavioral
+R2
+R3
+R4
+DEx4 work 7 arbiter 0 22 4`B9244aWdIMKOJ]Yjg?h0
+l66
+L45
+VV29h_Q0;]9=]kFS5LIS_?0
+R8
+31
+R9
+R10
+R11
+R12
+R13
+!s100 :O2h8Xi5^dScRDDaL6f?G0
+!i10b 1
+Ecrossbar
+Z14 w1688768188
+R2
+R3
+R4
+R5
+Z15 8F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/crossbar.vhd
+Z16 FF:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/crossbar.vhd
+l0
+L5
+VOkKTL`kU@W4MXfZLD99RH1
+R8
+31
+Z17 !s108 1691142525.995000
+Z18 !s90 -reportprogress|300|-93|-work|work|F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/crossbar.vhd|
+Z19 !s107 F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/crossbar.vhd|
+R12
+R13
+!s100 K:VLh>X;jXU=?XZMZ:VcD2
+!i10b 1
+Abehavioral
+R2
+R3
+R4
+DEx4 work 8 crossbar 0 22 OkKTL`kU@W4MXfZLD99RH1
+l27
+L25
+VnbUBHRDYAmNmkZ``3EGiS0
+R8
+31
+R17
+R18
+R19
+R12
+R13
+!s100 ?8?mSe>je?m9AZDmWg6gG0
+!i10b 1
+Efifo_controller
+Z20 w1688306147
+R2
+R3
+R4
+R5
+Z21 8F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/fifo_controller.vhd
+Z22 FF:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/fifo_controller.vhd
+l0
+L5
+VPTg<UdJdO7RAFm<?oPC>Q1
+R8
+31
+Z23 !s108 1691142525.715000
+Z24 !s90 -reportprogress|300|-93|-work|work|F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/fifo_controller.vhd|
+Z25 !s107 F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/fifo_controller.vhd|
+R12
+R13
+!s100 F4DPEaCk_OhHfI0h4Chd41
+!i10b 1
+Abehavioral
+R2
+R3
+R4
+DEx4 work 15 fifo_controller 0 22 PTg<UdJdO7RAFm<?oPC>Q1
+l20
+L15
+VVcbg]=31YZWUF>`mK7gfL1
+R8
+31
+R23
+R24
+R25
+R12
+R13
+!s100 obAo3bWAEU]BoF^T]C35;0
+!i10b 1
+Efifo_input_buffer
+Z26 w1688721087
+R2
+R3
+R4
+R5
+Z27 8F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/fifo_input_buffer.vhd
+Z28 FF:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/fifo_input_buffer.vhd
+l0
+L5
+VcdV27z9CSbfY>YbQOdfSb1
+R8
+31
+Z29 !s108 1691142525.576000
+Z30 !s90 -reportprogress|300|-93|-work|work|F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/fifo_input_buffer.vhd|
+Z31 !s107 F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/fifo_input_buffer.vhd|
+R12
+R13
+!s100 FdKZHXSKLF;Eld7HD^?C31
+!i10b 1
+Abehavioral
+R2
+R3
+R4
+DEx4 work 17 fifo_input_buffer 0 22 cdV27z9CSbfY>YbQOdfSb1
+l36
+L14
+VM?og3AF8UQ1_J0GG[U:9<2
+R8
+31
+R29
+R30
+R31
+R12
+R13
+!s100 IT0YOA[QSS[Mak[zfDNbm0
+!i10b 1
+Enoc
+Z32 w1688811781
+R2
+R3
+R4
+R5
+Z33 8F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/NoC.vhd
+Z34 FF:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/NoC.vhd
+l0
+L5
+Ve@nH9aAHO9>`2D^_3fj@d1
+R8
+31
+Z35 !s108 1691142524.903000
+Z36 !s90 -reportprogress|300|-93|-work|work|F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/NoC.vhd|
+Z37 !s107 F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/NoC.vhd|
+R12
+R13
+!s100 PWhTQi_eABWboBa8K_ke]1
+!i10b 1
+Abehavioral
+R2
+R3
+R4
+DEx4 work 3 noc 0 22 e@nH9aAHO9>`2D^_3fj@d1
+l116
+L61
+V?5:EPe2LaJ2h]gZh66Ych3
+R8
+31
+R35
+R36
+R37
+R12
+R13
+!s100 lOFK8:0<?P4gUFTEL@88E0
+!i10b 1
+Enoc_tb
+Z38 w1691141803
+R2
+R3
+R4
+R5
+Z39 8F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/NoC_tb.vhd
+Z40 FF:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/NoC_tb.vhd
+l0
+L5
+V;L`GnYc^Y_;EbS3d9k0Sf2
+!s100 A5N3WFk>_>S:TUl91]L170
+R8
+31
+!i10b 1
+Z41 !s108 1691142526.328000
+Z42 !s90 -reportprogress|300|-93|-work|work|F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/NoC_tb.vhd|
+Z43 !s107 F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/NoC_tb.vhd|
+R12
+R13
+Abehavioral
+R2
+R3
+R4
+DEx4 work 6 noc_tb 0 22 ;L`GnYc^Y_;EbS3d9k0Sf2
+l73
+L8
+V9QP>]JVPAm2H9FaIZhOSV1
+!s100 gdFSGdiH0T3_LRoTUWYJH1
+R8
+31
+!i10b 1
+R41
+R42
+R43
+R12
+R13
+Eregister_file
+Z44 w1688306145
+R2
+R3
+R4
+R5
+Z45 8F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/register_file.vhd
+Z46 FF:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/register_file.vhd
+l0
+L5
+VmlTUTZ1mJ7]6d:>7AlgeM2
+R8
+31
+Z47 !s108 1691142524.405000
+Z48 !s90 -reportprogress|300|-93|-work|work|F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/register_file.vhd|
+Z49 !s107 F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/register_file.vhd|
+R12
+R13
+!s100 4JZ`U`9A75Akj7fea5LMN3
+!i10b 1
+Abehavioral
+R2
+R3
+R4
+DEx4 work 13 register_file 0 22 mlTUTZ1mJ7]6d:>7AlgeM2
+l21
+L14
+VbgM`Y9K2ke<8Uaa<_iIJ00
+R8
+31
+R47
+R48
+R49
+R12
+R13
+!s100 DB@Z^nW4O[;o@JW`=5QHL1
+!i10b 1
+Erouter
+Z50 w1688812900
+R2
+R3
+R4
+R5
+Z51 8F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/router.vhd
+Z52 FF:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/router.vhd
+l0
+L5
+VTOf3TP9VR>?Fa:6IF8I1@3
+R8
+31
+Z53 !s108 1691142526.188000
+Z54 !s90 -reportprogress|300|-93|-work|work|F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/router.vhd|
+Z55 !s107 F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/router.vhd|
+R12
+R13
+!s100 c^94KHnli4:a[63a:WCE80
+!i10b 1
+Abehavioral
+R2
+R3
+R4
+DEx4 work 6 router 0 22 TOf3TP9VR>?Fa:6IF8I1@3
+l147
+L49
+V@o6IBB170LAgHm]Re<zVk2
+R8
+31
+R53
+R54
+R55
+R12
+R13
+!s100 5Km_4D2i2TBag3djTlhe52
+!i10b 1
+Erouting
+Z56 w1688769531
+R2
+R3
+R4
+R5
+Z57 8F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/routing_unit.vhd
+Z58 FF:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/routing_unit.vhd
+l0
+L5
+Vmog^K>K@:AQ<zfSIbnb]10
+R8
+31
+Z59 !s108 1691142524.198000
+Z60 !s90 -reportprogress|300|-93|-work|work|F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/routing_unit.vhd|
+Z61 !s107 F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/routing_unit.vhd|
+R12
+R13
+!s100 56dCcO4n`19g5DFggeb>n2
+!i10b 1
+Abehavioral
+R2
+R3
+R4
+DEx4 work 7 routing 0 22 mog^K>K@:AQ<zfSIbnb]10
+l31
+L23
+VYL8Di0gZEQP8S`bVnJhES2
+R8
+31
+R59
+R60
+R61
+R12
+R13
+!s100 TU02zZ9KFnFcC8i?K_<HF3
+!i10b 1

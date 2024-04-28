@@ -1,0 +1,56 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity crossbar is 
+	port(
+	in_l : in std_logic_vector(11 downto 0); 
+	in_n : in std_logic_vector(11 downto 0);
+	in_s : in std_logic_vector(11 downto 0);
+	in_w : in std_logic_vector(11 downto 0);
+	in_e : in std_logic_vector(11 downto 0);
+	s_l : in std_logic_vector(1 downto 0);
+	s_n : in std_logic_vector(1 downto 0);
+	s_s : in std_logic_vector(1 downto 0);
+	s_w : in std_logic_vector(1 downto 0);
+	s_e : in std_logic_vector(1 downto 0);
+	out_l : out std_logic_vector(11 downto 0); 
+	out_n : out std_logic_vector(11 downto 0);
+	out_s : out std_logic_vector(11 downto 0);
+	out_w : out std_logic_vector(11 downto 0);
+	out_e : out std_logic_vector(11 downto 0);
+	
+end crossbar;
+
+architecture behavioral of crossbar is
+	signal local, north, south, east, west : std_logic;
+	signal x_destination, y_destination : INTEGER;
+	signal x_node, y_node : INTEGER;
+begin
+	
+	out_l <=	in_e 	when (s_l = "00") else
+				in_w 	when (s_l = "01") else
+				in_s 	when (s_l = "10") else
+				in_n  when (s_l = "11") else
+				(others=>'0');
+	out_n <=	in_l  when (s_n = "00") else
+				in_e 	when (s_n = "01") else
+				in_w 	when (s_n = "10") else
+				in_s  when (s_n = "11") else
+				(others=>'0');
+	out_s <=	in_n 	when (s_s = "00") else
+				in_l 	when (s_s = "01") else
+				in_e 	when (s_s = "10") else
+				in_w  when (s_s = "11") else
+				(others=>'0');
+	out_w <=	in_s 	when (s_w = "00") else
+				in_n 	when (s_w = "01") else
+				in_l 	when (s_w = "10") else
+				in_e  when (s_w = "11") else
+				(others=>'0');
+	out_e <=	in_w 	when (s_e = "00") else
+				in_s 	when (s_e = "01") else
+				in_n 	when (s_e = "10") else
+				in_l  when (s_e = "11") else
+				(others=>'0');
+end behavioral;

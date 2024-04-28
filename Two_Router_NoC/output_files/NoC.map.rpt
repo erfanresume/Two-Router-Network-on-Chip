@@ -1,0 +1,569 @@
+Analysis & Synthesis report for NoC
+Thu Nov 02 15:55:35 2023
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |NoC|router:router_6|arbiter:arbiter_unit|state_reg
+  9. State Machine - |NoC|router:router_5|arbiter:arbiter_unit|state_reg
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Port Connectivity Checks: "router:router_6"
+ 13. Port Connectivity Checks: "router:router_5|fifo_input_buffer:buffer_east"
+ 14. Port Connectivity Checks: "router:router_5|fifo_input_buffer:buffer_west"
+ 15. Port Connectivity Checks: "router:router_5|fifo_input_buffer:buffer_south"
+ 16. Port Connectivity Checks: "router:router_5|fifo_input_buffer:buffer_north"
+ 17. Port Connectivity Checks: "router:router_5|fifo_input_buffer:buffer_local"
+ 18. Port Connectivity Checks: "router:router_5"
+ 19. Elapsed Time Per Partition
+ 20. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                    ;
++------------------------------------+--------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Thu Nov 02 15:55:35 2023      ;
+; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
+; Revision Name                      ; NoC                                        ;
+; Top-level Entity Name              ; NoC                                        ;
+; Family                             ; Cyclone IV E                               ;
+; Total logic elements               ; 529                                        ;
+;     Total combinational functions  ; 369                                        ;
+;     Dedicated logic registers      ; 240                                        ;
+; Total registers                    ; 240                                        ;
+; Total pins                         ; 122                                        ;
+; Total virtual pins                 ; 0                                          ;
+; Total memory bits                  ; 0                                          ;
+; Embedded Multiplier 9-bit elements ; 0                                          ;
+; Total PLLs                         ; 0                                          ;
++------------------------------------+--------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP4CE115F29C7      ;                    ;
+; Top-level entity name                                                      ; NoC                ; NoC                ;
+; Family name                                                                ; Cyclone IV E       ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 8      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                             ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                      ; Library ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------------------------------------------+---------+
+; routing_unit.vhd                 ; yes             ; User VHDL File  ; F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/routing_unit.vhd      ;         ;
+; register_file.vhd                ; yes             ; User VHDL File  ; F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/register_file.vhd     ;         ;
+; NoC.vhd                          ; yes             ; User VHDL File  ; F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/NoC.vhd               ;         ;
+; fifo_input_buffer.vhd            ; yes             ; User VHDL File  ; F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/fifo_input_buffer.vhd ;         ;
+; fifo_controller.vhd              ; yes             ; User VHDL File  ; F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/fifo_controller.vhd   ;         ;
+; arbiter.vhd                      ; yes             ; User VHDL File  ; F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/arbiter.vhd           ;         ;
+; crossbar.vhd                     ; yes             ; User VHDL File  ; F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/crossbar.vhd          ;         ;
+; router.vhd                       ; yes             ; User VHDL File  ; F:/installed program/Quartus II/quartus/bin/Altera_SRC/2Router_NoC_version4/router.vhd            ;         ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 529       ;
+;                                             ;           ;
+; Total combinational functions               ; 369       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 279       ;
+;     -- 3 input functions                    ; 65        ;
+;     -- <=2 input functions                  ; 25        ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 369       ;
+;     -- arithmetic mode                      ; 0         ;
+;                                             ;           ;
+; Total registers                             ; 240       ;
+;     -- Dedicated logic registers            ; 240       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 122       ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 240       ;
+; Total fan-out                               ; 2371      ;
+; Average fan-out                             ; 2.78      ;
++---------------------------------------------+-----------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                ;
++----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node             ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                            ; Library Name ;
++----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------+--------------+
+; |NoC                                   ; 369 (0)           ; 240 (0)      ; 0           ; 0            ; 0       ; 0         ; 122  ; 0            ; |NoC                                                                           ; work         ;
+;    |router:router_5|                   ; 188 (0)           ; 120 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5                                                           ; work         ;
+;       |arbiter:arbiter_unit|           ; 62 (62)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|arbiter:arbiter_unit                                      ; work         ;
+;       |crossbar:crossbar_switch|       ; 50 (50)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|crossbar:crossbar_switch                                  ; work         ;
+;       |fifo_input_buffer:buffer_east|  ; 12 (0)            ; 6 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_east                             ; work         ;
+;          |fifo_controller:controller|  ; 12 (12)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_east|fifo_controller:controller  ; work         ;
+;       |fifo_input_buffer:buffer_local| ; 16 (0)            ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_local                            ; work         ;
+;          |fifo_controller:controller|  ; 12 (12)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_local|fifo_controller:controller ; work         ;
+;          |register_file:reg_file|      ; 4 (4)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_local|register_file:reg_file     ; work         ;
+;       |fifo_input_buffer:buffer_north| ; 16 (0)            ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_north                            ; work         ;
+;          |fifo_controller:controller|  ; 12 (12)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_north|fifo_controller:controller ; work         ;
+;          |register_file:reg_file|      ; 4 (4)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_north|register_file:reg_file     ; work         ;
+;       |fifo_input_buffer:buffer_south| ; 16 (0)            ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_south                            ; work         ;
+;          |fifo_controller:controller|  ; 12 (12)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_south|fifo_controller:controller ; work         ;
+;          |register_file:reg_file|      ; 4 (4)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_south|register_file:reg_file     ; work         ;
+;       |fifo_input_buffer:buffer_west|  ; 16 (0)            ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_west                             ; work         ;
+;          |fifo_controller:controller|  ; 12 (12)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_west|fifo_controller:controller  ; work         ;
+;          |register_file:reg_file|      ; 4 (4)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_5|fifo_input_buffer:buffer_west|register_file:reg_file      ; work         ;
+;    |router:router_6|                   ; 181 (0)           ; 120 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6                                                           ; work         ;
+;       |arbiter:arbiter_unit|           ; 51 (51)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|arbiter:arbiter_unit                                      ; work         ;
+;       |crossbar:crossbar_switch|       ; 50 (50)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|crossbar:crossbar_switch                                  ; work         ;
+;       |fifo_input_buffer:buffer_east|  ; 16 (0)            ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_east                             ; work         ;
+;          |fifo_controller:controller|  ; 12 (12)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_east|fifo_controller:controller  ; work         ;
+;          |register_file:reg_file|      ; 4 (4)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_east|register_file:reg_file      ; work         ;
+;       |fifo_input_buffer:buffer_local| ; 16 (0)            ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_local                            ; work         ;
+;          |fifo_controller:controller|  ; 12 (12)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_local|fifo_controller:controller ; work         ;
+;          |register_file:reg_file|      ; 4 (4)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_local|register_file:reg_file     ; work         ;
+;       |fifo_input_buffer:buffer_north| ; 16 (0)            ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_north                            ; work         ;
+;          |fifo_controller:controller|  ; 12 (12)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_north|fifo_controller:controller ; work         ;
+;          |register_file:reg_file|      ; 4 (4)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_north|register_file:reg_file     ; work         ;
+;       |fifo_input_buffer:buffer_south| ; 16 (0)            ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_south                            ; work         ;
+;          |fifo_controller:controller|  ; 12 (12)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_south|fifo_controller:controller ; work         ;
+;          |register_file:reg_file|      ; 4 (4)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_south|register_file:reg_file     ; work         ;
+;       |fifo_input_buffer:buffer_west|  ; 12 (0)            ; 6 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_west                             ; work         ;
+;          |fifo_controller:controller|  ; 12 (12)           ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|fifo_input_buffer:buffer_west|fifo_controller:controller  ; work         ;
+;       |routing:routig_unit|            ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |NoC|router:router_6|routing:routig_unit                                       ; work         ;
++----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |NoC|router:router_6|arbiter:arbiter_unit|state_reg                                                                                                                                            ;
++------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+; Name             ; state_reg.grante ; state_reg.grantw ; state_reg.grants ; state_reg.grantn ; state_reg.grantl ; state_reg.waitre ; state_reg.waitrw ; state_reg.waitrs ; state_reg.waitrn ; state_reg.waitrl ;
++------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+; state_reg.waitrl ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ;
+; state_reg.waitrn ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 1                ;
+; state_reg.waitrs ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 1                ;
+; state_reg.waitrw ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 1                ;
+; state_reg.waitre ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 1                ;
+; state_reg.grantl ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; state_reg.grantn ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; state_reg.grants ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; state_reg.grantw ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; state_reg.grante ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
++------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |NoC|router:router_5|arbiter:arbiter_unit|state_reg                                                                                                                                            ;
++------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+; Name             ; state_reg.grante ; state_reg.grantw ; state_reg.grants ; state_reg.grantn ; state_reg.grantl ; state_reg.waitre ; state_reg.waitrw ; state_reg.waitrs ; state_reg.waitrn ; state_reg.waitrl ;
++------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+; state_reg.waitrl ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ;
+; state_reg.waitrn ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 1                ;
+; state_reg.waitrs ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 1                ;
+; state_reg.waitrw ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 1                ;
+; state_reg.waitre ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 1                ;
+; state_reg.grantl ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; state_reg.grantn ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; state_reg.grants ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; state_reg.grantw ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; state_reg.grante ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
++------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 240   ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 240   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 160   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------+
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_5|fifo_input_buffer:buffer_local|fifo_controller:controller|rd_ptr[0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_5|fifo_input_buffer:buffer_local|fifo_controller:controller|wr_ptr[0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_5|fifo_input_buffer:buffer_north|fifo_controller:controller|rd_ptr[0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_5|fifo_input_buffer:buffer_north|fifo_controller:controller|wr_ptr[1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_5|fifo_input_buffer:buffer_south|fifo_controller:controller|rd_ptr[1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_5|fifo_input_buffer:buffer_south|fifo_controller:controller|wr_ptr[1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_5|fifo_input_buffer:buffer_west|fifo_controller:controller|rd_ptr[1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_5|fifo_input_buffer:buffer_west|fifo_controller:controller|wr_ptr[0]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_6|fifo_input_buffer:buffer_local|fifo_controller:controller|rd_ptr[0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_6|fifo_input_buffer:buffer_local|fifo_controller:controller|wr_ptr[0] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_6|fifo_input_buffer:buffer_north|fifo_controller:controller|rd_ptr[1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_6|fifo_input_buffer:buffer_north|fifo_controller:controller|wr_ptr[1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_6|fifo_input_buffer:buffer_south|fifo_controller:controller|rd_ptr[1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_6|fifo_input_buffer:buffer_south|fifo_controller:controller|wr_ptr[1] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_6|fifo_input_buffer:buffer_east|fifo_controller:controller|rd_ptr[1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_6|fifo_input_buffer:buffer_east|fifo_controller:controller|wr_ptr[1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_5|fifo_input_buffer:buffer_east|fifo_controller:controller|rd_ptr[0]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_5|fifo_input_buffer:buffer_east|fifo_controller:controller|wr_ptr[1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_6|fifo_input_buffer:buffer_west|fifo_controller:controller|rd_ptr[1]  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |NoC|router:router_6|fifo_input_buffer:buffer_west|fifo_controller:controller|wr_ptr[0]  ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |NoC|router:router_6|arbiter:arbiter_unit|w_req_west                                     ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |NoC|router:router_5|arbiter:arbiter_unit|state_next                                     ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |NoC|router:router_5|arbiter:arbiter_unit|w_req_east                                     ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |NoC|router:router_5|arbiter:arbiter_unit|w_req_east                                     ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |NoC|router:router_5|arbiter:arbiter_unit|state_next                                     ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |NoC|router:router_6|arbiter:arbiter_unit|state_next                                     ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |NoC|router:router_6|arbiter:arbiter_unit|state_next                                     ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |NoC|router:router_6|arbiter:arbiter_unit|g_south                                        ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |NoC|router:router_6|arbiter:arbiter_unit|g_west                                         ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |NoC|router:router_5|arbiter:arbiter_unit|state_next                                     ;
+; 20:1               ; 5 bits    ; 65 LEs        ; 55 LEs               ; 10 LEs                 ; No         ; |NoC|router:router_5|crossbar:crossbar_switch|out_e[0]                                   ;
+; 20:1               ; 5 bits    ; 65 LEs        ; 55 LEs               ; 10 LEs                 ; No         ; |NoC|router:router_6|crossbar:crossbar_switch|out_w[4]                                   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "router:router_6"                                                                              ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port           ; Type   ; Severity ; Details                                                                             ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; current[2..1]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; current[31..3] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; current[0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; w_req_l        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; w_req_n        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; w_req_s        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; w_req_e        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; data_out_l     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; data_out_n     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; data_out_s     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; data_out_e     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "router:router_5|fifo_input_buffer:buffer_east"                                       ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; empty ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "router:router_5|fifo_input_buffer:buffer_west"                                       ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; empty ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "router:router_5|fifo_input_buffer:buffer_south"                                      ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; empty ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "router:router_5|fifo_input_buffer:buffer_north"                                      ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; empty ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "router:router_5|fifo_input_buffer:buffer_local"                                      ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; empty ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "router:router_5"                                                                              ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port           ; Type   ; Severity ; Details                                                                             ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; current[31..3] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; current[2]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; current[1]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; current[0]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; w_req_l        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; w_req_n        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; w_req_s        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; w_req_w        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; data_out_l     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; data_out_n     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; data_out_s     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; data_out_w     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+    Info: Processing started: Thu Nov 02 15:55:31 2023
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off NoC -c NoC
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file routing_unit.vhd
+    Info (12022): Found design unit 1: routing-behavioral
+    Info (12023): Found entity 1: routing
+Info (12021): Found 2 design units, including 1 entities, in source file register_file.vhd
+    Info (12022): Found design unit 1: register_file-behavioral
+    Info (12023): Found entity 1: register_file
+Info (12021): Found 2 design units, including 1 entities, in source file noc_tb.vhd
+    Info (12022): Found design unit 1: noc_tb-behavioral
+    Info (12023): Found entity 1: noc_tb
+Info (12021): Found 2 design units, including 1 entities, in source file noc.vhd
+    Info (12022): Found design unit 1: NoC-behavioral
+    Info (12023): Found entity 1: NoC
+Info (12021): Found 2 design units, including 1 entities, in source file fifo_tb.vhd
+    Info (12022): Found design unit 1: fifo_tb-behavioral
+    Info (12023): Found entity 1: fifo_tb
+Info (12021): Found 2 design units, including 1 entities, in source file fifo_input_buffer.vhd
+    Info (12022): Found design unit 1: fifo_input_buffer-behavioral
+    Info (12023): Found entity 1: fifo_input_buffer
+Info (12021): Found 2 design units, including 1 entities, in source file fifo_controller.vhd
+    Info (12022): Found design unit 1: fifo_controller-behavioral
+    Info (12023): Found entity 1: fifo_controller
+Info (12021): Found 2 design units, including 1 entities, in source file arbiter.vhd
+    Info (12022): Found design unit 1: arbiter-behavioral
+    Info (12023): Found entity 1: arbiter
+Info (12021): Found 2 design units, including 1 entities, in source file crossbar.vhd
+    Info (12022): Found design unit 1: crossbar-behavioral
+    Info (12023): Found entity 1: crossbar
+Info (12021): Found 2 design units, including 1 entities, in source file router.vhd
+    Info (12022): Found design unit 1: router-behavioral
+    Info (12023): Found entity 1: router
+Info (12021): Found 2 design units, including 1 entities, in source file router_tb.vhd
+    Info (12022): Found design unit 1: router_tb-behavioral
+    Info (12023): Found entity 1: router_tb
+Info (12127): Elaborating entity "NoC" for the top level hierarchy
+Info (12128): Elaborating entity "router" for hierarchy "router:router_5"
+Info (12128): Elaborating entity "fifo_input_buffer" for hierarchy "router:router_5|fifo_input_buffer:buffer_local"
+Info (12128): Elaborating entity "fifo_controller" for hierarchy "router:router_5|fifo_input_buffer:buffer_local|fifo_controller:controller"
+Info (12128): Elaborating entity "register_file" for hierarchy "router:router_5|fifo_input_buffer:buffer_local|register_file:reg_file"
+Info (12128): Elaborating entity "arbiter" for hierarchy "router:router_5|arbiter:arbiter_unit"
+Info (12128): Elaborating entity "routing" for hierarchy "router:router_5|routing:routig_unit"
+Info (12128): Elaborating entity "crossbar" for hierarchy "router:router_5|crossbar:crossbar_switch"
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 59 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "input_5_local[5]"
+    Warning (15610): No output dependent on input pin "input_5_local[6]"
+    Warning (15610): No output dependent on input pin "input_5_local[7]"
+    Warning (15610): No output dependent on input pin "input_5_local[8]"
+    Warning (15610): No output dependent on input pin "input_5_local[9]"
+    Warning (15610): No output dependent on input pin "input_5_local[10]"
+    Warning (15610): No output dependent on input pin "input_5_local[11]"
+    Warning (15610): No output dependent on input pin "input_5_north[5]"
+    Warning (15610): No output dependent on input pin "input_5_north[6]"
+    Warning (15610): No output dependent on input pin "input_5_north[7]"
+    Warning (15610): No output dependent on input pin "input_5_north[8]"
+    Warning (15610): No output dependent on input pin "input_5_north[9]"
+    Warning (15610): No output dependent on input pin "input_5_north[10]"
+    Warning (15610): No output dependent on input pin "input_5_north[11]"
+    Warning (15610): No output dependent on input pin "input_5_south[5]"
+    Warning (15610): No output dependent on input pin "input_5_south[6]"
+    Warning (15610): No output dependent on input pin "input_5_south[7]"
+    Warning (15610): No output dependent on input pin "input_5_south[8]"
+    Warning (15610): No output dependent on input pin "input_5_south[9]"
+    Warning (15610): No output dependent on input pin "input_5_south[10]"
+    Warning (15610): No output dependent on input pin "input_5_south[11]"
+    Warning (15610): No output dependent on input pin "input_5_west[5]"
+    Warning (15610): No output dependent on input pin "input_5_west[6]"
+    Warning (15610): No output dependent on input pin "input_5_west[7]"
+    Warning (15610): No output dependent on input pin "input_5_west[8]"
+    Warning (15610): No output dependent on input pin "input_5_west[9]"
+    Warning (15610): No output dependent on input pin "input_5_west[10]"
+    Warning (15610): No output dependent on input pin "input_5_west[11]"
+    Warning (15610): No output dependent on input pin "input_6_local[5]"
+    Warning (15610): No output dependent on input pin "input_6_local[6]"
+    Warning (15610): No output dependent on input pin "input_6_local[7]"
+    Warning (15610): No output dependent on input pin "input_6_local[8]"
+    Warning (15610): No output dependent on input pin "input_6_local[9]"
+    Warning (15610): No output dependent on input pin "input_6_local[10]"
+    Warning (15610): No output dependent on input pin "input_6_local[11]"
+    Warning (15610): No output dependent on input pin "input_6_north[5]"
+    Warning (15610): No output dependent on input pin "input_6_north[6]"
+    Warning (15610): No output dependent on input pin "input_6_north[7]"
+    Warning (15610): No output dependent on input pin "input_6_north[8]"
+    Warning (15610): No output dependent on input pin "input_6_north[9]"
+    Warning (15610): No output dependent on input pin "input_6_north[10]"
+    Warning (15610): No output dependent on input pin "input_6_north[11]"
+    Warning (15610): No output dependent on input pin "input_6_south[5]"
+    Warning (15610): No output dependent on input pin "input_6_south[6]"
+    Warning (15610): No output dependent on input pin "input_6_south[7]"
+    Warning (15610): No output dependent on input pin "input_6_south[8]"
+    Warning (15610): No output dependent on input pin "input_6_south[9]"
+    Warning (15610): No output dependent on input pin "input_6_south[10]"
+    Warning (15610): No output dependent on input pin "input_6_south[11]"
+    Warning (15610): No output dependent on input pin "input_6_east[5]"
+    Warning (15610): No output dependent on input pin "input_6_east[6]"
+    Warning (15610): No output dependent on input pin "input_6_east[7]"
+    Warning (15610): No output dependent on input pin "input_6_east[8]"
+    Warning (15610): No output dependent on input pin "input_6_east[9]"
+    Warning (15610): No output dependent on input pin "input_6_east[10]"
+    Warning (15610): No output dependent on input pin "input_6_east[11]"
+    Warning (15610): No output dependent on input pin "cin_6_north"
+    Warning (15610): No output dependent on input pin "cin_6_south"
+    Warning (15610): No output dependent on input pin "cin_6_east"
+Info (21057): Implemented 651 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 114 input pins
+    Info (21059): Implemented 8 output pins
+    Info (21061): Implemented 529 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 61 warnings
+    Info: Peak virtual memory: 4672 megabytes
+    Info: Processing ended: Thu Nov 02 15:55:35 2023
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:03
+
+

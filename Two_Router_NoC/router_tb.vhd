@@ -1,0 +1,131 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+ENTITY router_tb is
+END router_tb;
+
+architecture behavioral of router_tb is
+
+component router port(
+	
+	clk, reset: in std_logic;
+	
+	current : in integer; 
+	
+	input_local: in std_logic_vector(11 downto 0);
+	input_north: in std_logic_vector(11 downto 0);
+	input_south: in std_logic_vector(11 downto 0);
+	input_west : in std_logic_vector(11 downto 0);
+	input_east : in std_logic_vector(11 downto 0);
+	
+	we_local: in std_logic;	
+	we_north: in std_logic;
+	we_south: in std_logic;
+	we_west : in std_logic;
+	we_east : in std_logic;
+	
+	cin_local: in std_logic; 
+	cin_north: in std_logic;
+	cin_south: in std_logic;
+	cin_west : in std_logic;
+	cin_east : in std_logic;
+	
+	cout_local: out std_logic;
+	cout_north: out std_logic;
+	cout_south: out std_logic;
+	cout_west: out std_logic;
+	cout_east: out std_logic;
+	
+	w_req_l : out std_logic; 
+	w_req_n : out std_logic;
+	w_req_s : out std_logic;
+	w_req_w : out std_logic;
+	w_req_e : out std_logic;
+	
+	data_out_l : out std_logic_vector(11 downto 0); 
+	data_out_n : out std_logic_vector(11 downto 0);
+	data_out_s : out std_logic_vector(11 downto 0);
+	data_out_w : out std_logic_vector(11 downto 0);
+	data_out_e : out std_logic_vector(11 downto 0)
+	);
+	end component;
+	
+	signal tb_clk, tb_reset: std_logic;
+	signal tb_current : integer;
+	signal tb_input_local, tb_input_north, tb_input_south, tb_input_west,tb_input_east: std_logic_vector(11 downto 0):="000000000000";
+	signal tb_we_local, tb_we_north, tb_we_south, tb_we_west,tb_we_east: std_logic;
+	signal tb_cin_local,tb_cin_north,tb_cin_south,tb_cin_west,tb_cin_east : std_logic:='0';
+	signal tb_cout_local, tb_cout_north, tb_cout_south, tb_cout_west,tb_cout_east: std_logic:='0';
+	signal tb_w_req_l, tb_w_req_n, tb_w_req_s, tb_w_req_w,tb_w_req_e: std_logic:='0';
+	signal tb_data_out_l,tb_data_out_n,tb_data_out_s,tb_data_out_w,tb_data_out_e: std_logic_vector(11 downto 0);
+	
+	constant clock_period : time := 200 ns;
+begin
+
+	uut: router port map(
+	clk => tb_clk, reset => tb_reset, current => tb_current, 
+	input_local => tb_input_local, input_north => tb_input_north, input_south => tb_input_south, input_west => tb_input_west, input_east => tb_input_east,
+	we_local => tb_we_local, we_north => tb_we_north, we_south => tb_we_south, we_west => tb_we_west,we_east => tb_we_east ,
+	cin_local => tb_cin_local, cin_north => tb_cin_north, cin_south => tb_cin_south, cin_west => tb_cin_west,cin_east => tb_cin_east,
+	cout_local => tb_cout_local, cout_north => tb_cout_north, cout_south => tb_cout_south, cout_west => tb_cout_west,cout_east=> tb_cout_east,
+	w_req_l => tb_w_req_l,w_req_n =>tb_w_req_n ,w_req_s =>tb_w_req_s ,w_req_w => tb_w_req_w,w_req_e => tb_w_req_e,
+	data_out_l => tb_data_out_l,data_out_n => tb_data_out_n,data_out_s => tb_data_out_s,data_out_w => tb_data_out_w,data_out_e => tb_data_out_e
+	);
+	
+	
+	clk_process:process
+	begin
+	--loop
+		tb_clk <= '0';
+		wait for clock_period/2;
+		tb_clk <= '1';
+		wait for clock_period/2;
+		--if (now >= 2us)then
+			--wait;
+		--end if;
+	--end loop;
+	end process;
+	
+	
+		tb_reset <= '1', '0' after 200 ns;
+
+	
+	--tb_current <= 5;
+	--tb_input_local <= "000000000001";
+	--tb_we_local <= '1';
+	--tb_cin_local <='0';
+	--wait for clock_period;
+	--tb_current <= 5;
+	--tb_input_north <= "000000000100";
+	--tb_we_north <= '1';
+	--tb_cin_north <='0';
+	--wait for clock_period;
+	tb_current <= 5;
+	tb_input_north<= "000000001001","100000000000" after 500 ns; 
+	tb_we_north <= '1'after 300 ns, '0' after 700 ns;
+	tb_cin_north <='0';
+
+	
+	tb_input_south<= "000000000001","100000000000" after 1000 ns; 
+	tb_we_north <= '1'after 300 ns, '0' after 700 ns;
+	tb_cin_south <='0';
+	--tb_current <= 5;
+	--tb_input_south <= "000000000110";
+	--tb_we_south <= '1';
+	--tb_cin_south <='0';
+	--wait for clock_period;
+	--tb_current <= 5;
+	--tb_input_west <= "000000000110";
+	--tb_we_west <= '1';
+	--tb_cin_west <='0';
+	--wait for clock_period;
+	--tb_current <= 5;
+	--tb_input_east <= "000000001001";
+	--tb_we_east <= '1';
+	--tb_cin_east <='0';
+	--wait for clock_period;
+	
+	
+
+end behavioral;

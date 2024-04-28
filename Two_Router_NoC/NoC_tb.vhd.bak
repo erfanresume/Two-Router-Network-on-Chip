@@ -1,0 +1,70 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+ENTITY NoC_tb IS
+END NoC_tb;
+
+architecture behavioral OF NoC_tb IS
+
+component NoC port(
+	
+	clk, reset: in std_logic;
+
+	w_en_north_in_5, w_en_south_in_5, w_en_west_in_5, w_en_local_in_5: in std_logic;
+	w_en_north_in_6, w_en_south_in_6, w_en_east_in_6, w_en_local_in_6: in std_logic;
+
+	fifo_in_north_in_5, fifo_in_south_in_5, fifo_in_west_in_5, fifo_in_local_in_5: in std_logic_vector(11 downto 0);  
+	fifo_in_north_in_6, fifo_in_south_in_6, fifo_in_east_in_6, fifo_in_local_in_6: in std_logic_vector(11 downto 0)
+	);
+	end component;
+	
+	signal clk, reset: std_logic;
+	signal fifo_in_north_in_5, fifo_in_south_in_5, fifo_in_west_in_5, fifo_in_local_in_5: std_logic_vector(11 downto 0):="000000000000";
+	signal fifo_in_north_in_6, fifo_in_south_in_6, fifo_in_east_in_6, fifo_in_local_in_6: std_logic_vector(11 downto 0):="000000000000";
+	
+	signal w_en_north_in_5, w_en_south_in_5, w_en_west_in_5, w_en_local_in_5: std_logic:='0';
+	signal w_en_north_in_6, w_en_south_in_6, w_en_east_in_6, w_en_local_in_6: std_logic:='0';
+	
+begin
+
+	uut: NoC port map(
+	clk => clk, reset => reset, 
+	fifo_in_north_in_5 => fifo_in_north_in_5, fifo_in_south_in_5 => fifo_in_south_in_5, fifo_in_west_in_5 => fifo_in_west_in_5, fifo_in_local_in_5 => fifo_in_local_in_5,
+	fifo_in_north_in_6 => fifo_in_north_in_6, fifo_in_south_in_6 => fifo_in_south_in_6, fifo_in_east_in_6 => fifo_in_east_in_6, fifo_in_local_in_6 => fifo_in_local_in_6,
+	w_en_north_in_5 => w_en_north_in_5, w_en_south_in_5 => w_en_south_in_5, w_en_west_in_5 => w_en_west_in_5, w_en_local_in_5 => w_en_local_in_5,
+	w_en_north_in_6 => w_en_north_in_6, w_en_south_in_6 => w_en_south_in_6, w_en_east_in_6 => w_en_east_in_6, w_en_local_in_6 => w_en_local_in_6
+	);
+
+	process
+	begin
+	loop
+		clk <= '0';
+		wait for 100 ns;
+		clk <= '1';
+		wait for 100 ns;
+		if (now >= 2us)then
+			wait;
+		end if;
+	end loop;
+	end process;
+	
+	reset <= '1', '0' after 200 ns;
+	
+	fifo_in_west_in_5<= "00"&"00100"&"01010", "10"&"00100"&"00000" after 500 ns; --(4->10)
+	w_en_west_in_5 <= '1'after 300 ns, '0' after 700 ns;
+	
+	fifo_in_east_in_6<= "00"&"00111"&"00001", "10"&"00111"&"00000" after 500 ns; --(7->1)
+	w_en_east_in_6<= '1'after 300 ns, '0' after 700 ns;
+	
+	fifo_in_local_in_5<= "00"&"00101"&"00110", "10"&"00101"&"00000" after 500 ns; --(5->6)
+	w_en_local_in_5<= '1'after 300 ns, '0' after 700 ns;
+	
+	fifo_in_local_in_6<= "00"&"00110"&"01001", "10"&"00110"&"00000" after 500 ns; --(6->9)
+	w_en_local_in_6<= '1'after 300 ns, '0' after 700 ns;
+	
+	fifo_in_south_in_6<= "00"&"01010"&"00001", "10"&"01010"&"00000" after 500 ns; --(10->1)
+	w_en_south_in_6<= '1'after 300 ns, '0' after 700 ns;
+	
+
+end behavioral;

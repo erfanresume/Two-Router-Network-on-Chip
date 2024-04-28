@@ -1,0 +1,282 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity NoC is
+port(
+clk, reset: in std_logic;
+w_en_north_in_5, w_en_south_in_5, w_en_west_in_5,w_en_local_in_5: in std_logic;
+w_en_north_in_6, w_en_south_in_6, w_en_east_in_6,w_en_local_in_6: in std_logic;
+fifo_in_north_in_5, fifo_in_south_in_5, fifo_in_west_in_5, fifo_in_local_in_5: in std_logic_vector(11 downto 0); 
+fifo_in_north_in_6, fifo_in_south_in_6, fifo_in_east_in_6, fifo_in_local_in_6: in std_logic_vector(11 downto 0)
+);
+end NoC;
+
+architecture behavioral of NoC is
+	
+	component router_to_arbiter
+	port(
+	clk, reset: in std_logic;
+	current : in INTEGER; 
+	fifo_in_local, fifo_in_west, fifo_in_east, fifo_in_north, fifo_in_south : in std_logic_vector(11 downto 0); 
+	w_en_north, w_en_south, w_en_east, w_en_west, w_en_local: out std_logic;
+	credit_out_north, credit_out_south, credit_out_east, credit_out_west, credit_out_local: in std_logic;
+	empty_in_north, empty_in_south, empty_in_east, empty_in_west, empty_in_local: in std_logic;
+	fifo_out_north, fifo_out_south, fifo_out_east, fifo_out_west, fifo_out_local: out std_logic_vector(11 downto 0);
+	r_en_north_in, r_en_south_in, r_en_east_in, r_en_west_in, r_en_local_in: out std_logic
+	);
+	end component router_to_arbiter;
+
+	component fifo_buffer port(
+		clk,reset,wr,rd :in std_logic;
+		w_data : in std_logic_vector(11 downto 0);
+		full, empty : out std_logic;
+		r_data : out std_logic_vector(11 downto 0)
+	);
+	end component;
+	
+	signal signal_in_local_5, signal_in_west_5, signal_in_north_5, signal_in_south_5, signal_in_east_5: std_logic_vector(11 downto 0); 
+	signal signal_in_local_6, signal_in_west_6, signal_in_north_6, signal_in_south_6, signal_in_east_6: std_logic_vector(11 downto 0);
+	signal w_en_north_5, w_en_south_5, w_en_east_5, w_en_west_5, w_en_local_5: std_logic;
+	signal w_en_north_6, w_en_south_6, w_en_east_6, w_en_west_6, w_en_local_6: std_logic;
+	signal signal_out_local_5, signal_out_west_5, signal_out_north_5, signal_out_south_5, signal_out_east_5: std_logic_vector(11 downto 0);
+	signal signal_out_local_6, signal_out_west_6, signal_out_north_6, signal_out_south_6, signal_out_east_6: std_logic_vector(11 downto 0);
+	signal empty_east_5: std_logic; 
+	signal empty_west_6: std_logic;
+	signal full_north_5, full_south_5, full_east_5, full_west_5, full_local_5: std_logic;
+	signal full_north_6, full_south_6, full_east_6, full_west_6, full_local_6: std_logic;
+	signal r_en_north_5, r_en_south_5, r_en_east_5, r_en_west_5, r_en_local_5: std_logic;
+	signal r_en_north_6, r_en_south_6, r_en_east_6, r_en_west_6, r_en_local_6: std_logic;
+	signal empty_in_north_5, empty_in_south_5, empty_in_east_5, empty_in_west_5, empty_in_local_5: std_logic;
+	signal empty_in_north_6, empty_in_south_6, empty_in_east_6, empty_in_west_6, empty_in_local_6: std_logic;
+
+begin
+	
+	----------------------------------------------- (router 5) -----------------------------------------------------	
+	router_5: router_to_arbiter port map(
+	clk => clk, reset => reset,
+	current => 5 ,
+	fifo_in_local => signal_in_local_5, fifo_in_west => signal_in_west_5, fifo_in_east => signal_in_east_5,
+	fifo_in_north => signal_in_north_5, fifo_in_south => signal_in_south_5,
+	w_en_north => w_en_north_5, w_en_south => w_en_south_5, w_en_east => w_en_east_5, w_en_west => w_en_west_5, w_en_local => w_en_local_5,
+	credit_out_north => full_north_5, credit_out_south => full_south_5, credit_out_east => full_east_5, credit_out_west => full_west_5, credit_out_local => full_local_5,
+	empty_in_north => empty_in_north_5, empty_in_south => empty_in_south_5, empty_in_east => empty_in_east_5, empty_in_west => empty_in_west_5, empty_in_local => empty_in_local_5,
+	r_en_north_in => r_en_north_5, r_en_south_in => r_en_south_5, r_en_east_in => r_en_east_5, r_en_west_in => r_en_west_5, r_en_local_in => r_en_local_5,
+	fifo_out_north => signal_out_north_5, fifo_out_south => signal_out_south_5, fifo_out_east => signal_out_east_5, fifo_out_west => signal_out_west_5, fifo_out_local => signal_out_local_5 --khurujie node ke mire be vurudie fifo haye khuruji
+	);
+	----------------------------------------------------node1-------------------------------------------------------------
+	buffer_north_in_5: fifo_buffer port map(
+		clk => clk, reset => reset,
+		wr => w_en_north_in_5, 
+		rd => r_en_north_5, 
+		w_data => fifo_in_north_in_5,
+		full => open,
+		empty => empty_in_north_5,
+		r_data => signal_in_north_5 -- it goes to north input of router 5
+	);
+	----------------------------------------------------node9---------------------------------------------------------------- 
+	buffer_south_in_5: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_south_in_5, 
+		rd => r_en_south_5,  
+		w_data => fifo_in_south_in_5, 
+		full => open,
+		empty => empty_in_south_5,
+		r_data => signal_in_south_5 -- it goes to south input of router 5
+	);
+	----------------------------------------------------node4--------------------------------------------
+	buffer_west_in_5: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_west_in_5, 
+		rd => r_en_west_5, 
+		w_data => fifo_in_west_in_5,
+		full => open,
+		empty => empty_in_west_5,
+		r_data => signal_in_west_5 -- it goes to west input of router 5
+	);
+	-----------------------------------------------------node6-------------------------------------
+	--buffer_east_in_5: fifo_buffer port map( 
+	--	clk => clk, reset => reset,
+	--	wr => w_en_west_in_6, 
+	--	rd => r_en_west_6 , 
+	--	w_data => signal_out_west_6, 
+	--	full => full_east_5,
+	--	empty => empty_in_east_5,
+	--	r_data => signal_in_east_5 -- it goes to local input of router 5
+--	);
+	------------------------------------------------------node5-------------------------------------------
+	buffer_local_in_5: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_local_in_5, 
+		rd => r_en_local_5, 
+		w_data => fifo_in_local_in_5, 
+		full => open,
+		empty => empty_in_local_5,
+		r_data => signal_in_local_5 
+	);
+	
+	buffer_north_out_5: fifo_buffer port map(
+		clk => clk, reset => reset,
+		wr => w_en_north_5, 
+		rd => '0', 
+		w_data => signal_out_north_5,
+		full => full_north_5,
+		empty => open,
+		r_data => open 
+	);
+	
+	buffer_south_out_5: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_south_5, 
+		rd => '0',  
+		w_data => signal_out_south_5, 
+		full => full_south_5,
+		empty => open,
+		r_data => open 
+	);
+	
+	buffer_west_out_5: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_west_5, 
+		rd => '0', 
+		w_data => signal_out_west_5,
+		full => full_west_5,
+		empty => open,
+		r_data => open 
+	);
+	
+	buffer_east_out_5: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_east_5, 
+		rd => r_en_west_6, 
+		w_data => signal_out_east_5, 
+		full => full_east_5,
+		empty => empty_in_west_6,
+		r_data => signal_in_west_6 
+	);
+	
+	buffer_local_out_5: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_local_5, 
+		rd => '0', 
+		w_data => signal_out_local_5, 
+		full => full_local_5,
+		empty => open,
+		r_data => open 
+	);
+	
+----------------------------------------------- (router 6) -----------------------------------------------------
+	
+	router_6: router_to_arbiter port map(
+	clk => clk, reset => reset,
+	current => 6,
+	fifo_in_local => signal_in_local_6, fifo_in_west => signal_in_west_6, fifo_in_east => signal_in_east_6,
+	fifo_in_north => signal_in_north_6, fifo_in_south => signal_in_south_6,
+	w_en_north => w_en_north_6, w_en_south => w_en_south_6, w_en_east => w_en_east_6, w_en_west => w_en_west_6, w_en_local => w_en_local_6,
+	credit_out_north => full_north_6, credit_out_south => full_south_6, credit_out_east => full_east_6, credit_out_west => full_west_6, credit_out_local => full_local_6,
+	empty_in_north  =>empty_in_north_6 , empty_in_south =>empty_in_south_6 , empty_in_east => empty_in_east_6, empty_in_west => empty_in_west_6, empty_in_local => empty_in_local_6 ,
+	r_en_north_in => r_en_north_6, r_en_south_in => r_en_south_6, r_en_east_in => r_en_east_6, r_en_west_in => r_en_west_6, r_en_local_in => r_en_local_6,
+	fifo_out_north => signal_out_north_6, fifo_out_south => signal_out_south_6, fifo_out_east => signal_out_east_6, fifo_out_west => signal_out_west_6, fifo_out_local => signal_out_local_6
+	);
+	------------------------------------------------------node2-------------------------------------------
+	buffer_north_in_6: fifo_buffer port map(
+		clk => clk, reset => reset,
+		wr => w_en_north_in_6, 
+		rd => r_en_north_6, 
+		w_data => fifo_in_north_in_6, 
+		full => open,
+		empty => empty_in_north_6,
+		r_data => signal_in_north_6 
+	);
+	------------------------------------------------------node10-------------------------------------------
+	buffer_south_in_6: fifo_buffer port map(
+		clk => clk, reset => reset,
+		wr => w_en_south_in_6, 
+		rd => r_en_south_6, 
+		w_data => fifo_in_south_in_6, 
+		full => open,
+		empty => empty_in_south_6,
+		r_data => signal_in_south_6 
+	);
+	------------------------------------------------------node7-------------------------------------------
+	buffer_east_in_6: fifo_buffer port map(
+		clk => clk, reset => reset,
+		wr => w_en_east_in_6, 
+		rd => r_en_east_6, 
+		w_data => fifo_in_east_in_6, 
+		full => open,
+		empty => empty_in_east_6,
+		r_data => signal_in_east_6 
+	);
+		------------------------------------------------------node5-------------------------------------------
+	--buffer_west_in_6: fifo_buffer port map( 
+	--	clk => clk, reset => reset,
+	--	wr => w_en_east_5, 
+	--	rd => r_en_west_5, 
+	--	w_data => signal_out_east_5, 
+	--	full => full_west_6,
+	--	empty => empty_in_west_6,
+	--	r_data => signal_in_west_6 
+	--	);
+	------------------------------------------------------node6-------------------------------------------
+	buffer_local_in_6: fifo_buffer port map(
+		clk => clk, reset => reset,
+		wr => w_en_local_in_6, 
+		rd => r_en_local_6, 
+		w_data => fifo_in_local_in_6, 
+		full => open,
+		empty => empty_in_local_6,
+		r_data => signal_in_local_6 
+	);
+	
+		buffer_north_out_6: fifo_buffer port map(
+		clk => clk, reset => reset,
+		wr => w_en_north_6, 
+		rd => '0', 
+		w_data => signal_out_north_6,
+		full => full_north_6,
+		empty => open,
+		r_data => open 
+	);
+	
+	buffer_south_out_6: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_south_6, 
+		rd => '0',  
+		w_data => signal_out_south_6, 
+		full => full_south_6,
+		empty => open,
+		r_data => open 
+	);
+	
+	buffer_west_out_6: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_west_6, 
+		rd => r_en_east_5, 
+		w_data => signal_out_west_6,
+		full => full_west_6,
+		empty => empty_in_east_5,
+		r_data => signal_in_east_5
+	);
+	
+	buffer_east_out_6: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_east_6, 
+		rd => '0', 
+		w_data => signal_out_east_6, 
+		full => full_east_6,
+		empty => open,
+		r_data => open 
+	);
+	
+	buffer_local_out_6: fifo_buffer port map( 
+		clk => clk, reset => reset,
+		wr => w_en_local_6, 
+		rd => '0', 
+		w_data => signal_out_local_6, 
+		full => full_local_6,
+		empty => open,
+		r_data => open 
+	);
+	
+end behavioral;
