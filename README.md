@@ -30,6 +30,10 @@ information.
 - Once it receives an address, it decodes the address and generates destination port and send it back to the arbiter unit. 
 - It is constructed by some multiplexers to provide the associated output port for the packet.
 - We will implement the XY routing algorithm
+## Assignments Format
+- Files
+  - DSD_VHDL_Project : Project description
+  - Two_Router_NoC: Directory containing codes
 
 
 
