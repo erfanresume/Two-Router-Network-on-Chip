@@ -32,7 +32,7 @@ information.
 - We will implement the XY routing algorithm
 ## Assignments Format
 - Files
-  - DSD_VHDL_Project : Project description
+  - DSD_VHDL_Project: Project description
   - Two_Router_NoC: Directory containing codes
 
 
